@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pizza market</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="clearfix">
+  <aside id="aside">
+    <div id="controls">
+        <button id="list" title="Изменить вид страницы">Изменить вид страницы</button>
+      </div>
+    <div id="sorts">
+      <div class="sort__title">
+        <h3>Сортировать по ...</h3>
+      </div>
+      <button id="byPrice" class="sort" title="сортировать по возрастанию цены">цене</button>
+      <button id="byCallory" class="sort" title="сортировать по каллорийности">каллорийности</button>
+      <button id="byName" class="sort" title="сортировать по названию">названию</button>
+    </div>
+    <div class="filters">
+      <div class="filter__title">
+        <h3>Филтр по ...</h3>
+      </div>
+      <div id="filters">
+        <div>
+          <input type="checkbox" id="tomates" class="filter">
+          <label for="tomates">Помидоры</label>
+        </div>
+        <div>
+          <input type="checkbox" id="chees" class="filter">
+          <label for="chees">Сыр</label>
+        </div>
+        <div>
+          <input type="checkbox" id="karides" class="filter">
+          <label for="karides">Креветки</label>
+        </div>
+        <div>
+          <input type="checkbox" id="salyami" class="filter">
+          <label for="salyami">Салями</label>
+        </div>
+        <div>
+          <input type="checkbox" id="olive" class="filter">
+          <label for="olive">Оливки</label>
+        </div>
+        <div>
+          <input type="checkbox" id="mashrooms" class="filter">
+          <label for="mashrooms">Грибы</label>
+        </div>
+        <div>
+            <input type="checkbox" id="chiken" class="filter">
+            <label for="chiken">Курица</label>
+          </div>
+      </div>
+    </div>
+  </aside>
+  <main id="main">
+    <ul id="pizzaCards"></ul>
+  </main>
+  <script src="./script.js"></script>
+</body>
+</html>
