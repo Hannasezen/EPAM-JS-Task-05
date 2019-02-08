@@ -128,16 +128,6 @@ sorts.addEventListener('click', sort)
 // loading results on the page
 window.onload = loadPizzas();
 
-/*function loadPizzasIE() {
-  var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : pizzas;
-
-  for (var i = 0; i < arr.length; i++) {
-    let li = document.createElement('li');
-    li.innerHTML = '<div class="card__img"><img src="' + arr[i].img + '"></img>/div><div class="card__text"><div class="card__description"><div class="card__name">"' + arr[i].name + '"</div><div class="card__ingredients">\u0418\u043D\u0433\u0440\u0435\u0434\u0438\u0435\u043D\u0442\u044B: ' + arr[i].ingredients.join(', ') + '</div><div class="card__callory">' + arr[i].callory + ' \u043A\u041A\u0430\u043B</div></div><div class="card__price">\u0426\u0435\u043D\u0430 <span>' + arr[i].price + '</span> \u0433\u0440\u043D</div></div>';
-    pizzaCards.appendChild(li);
-  }
-}*/
-
 function loadPizzas (arr) {
   arr = arr || pizzas;
   for (let i = 0; i < arr.length; i++) {
