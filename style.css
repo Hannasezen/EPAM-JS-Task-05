@@ -149,8 +149,24 @@ body {
   position: absolute;
   top: 5px;
   right: 5px;
+  cursor: pointer;
 }
 
+#cart-open {
+  display: none;
+  position: absolute;
+  top: calc(50vh - 400px/2);
+  left: calc(50% - 500px/2);
+  width: 500px;
+  height: 400px;
+  z-index: 20;
+  background: white;
+}
+
+
+#cart-open.open {
+  display: block;
+}
 
 
 #pizzaCards {
@@ -172,6 +188,7 @@ body {
   margin-bottom: 5%;
   border-radius: 10px;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6), -5px -5px 20px rgba(0, 0, 0, 0.6);
+  transition: -webkit-transform ease 0.5s;
   transition: transform ease 0.5s;
   transform-style: preserve-3d;
 }
