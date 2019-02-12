@@ -16,6 +16,7 @@ let cartList = doc.querySelector('#cart__list');
 let pizzas = [
   {
     img: './img/mashrooms.jpg',
+    id: 1,
     name: 'Грибная пицца',
     ingredients: ['основа', 'соус', 'грибы', 'помидоры', 'сыр'],
     callory: 578,
@@ -23,6 +24,7 @@ let pizzas = [
   },
   {
     img: './img/margarita.jpg',
+    id: 2,
     name: 'Маргарита пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'моцарелла', 'сыр'],
     callory: 362,
@@ -30,6 +32,7 @@ let pizzas = [
   },
   {
     img: './img/pepperony.jpeg',
+    id: 3,
     name: 'Пепперони пицца',
     ingredients: ['основа', 'соус', 'салями', 'ветчина', 'сыр'],
     callory: 486,
@@ -37,6 +40,7 @@ let pizzas = [
   },
   {
     img: './img/salyami.jpg',
+    id: 4,
     name: 'Салями пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'салями', 'оливки', 'сыр'],
     callory: 379,
@@ -44,6 +48,7 @@ let pizzas = [
   },
   {
     img: './img/vegetarian.jpeg',
+    id: 5,
     name: 'Вегетарианская пицца',
     ingredients: ['основа', 'cоус', 'помидоры', 'кукуруза', 'сыр'],
     callory: 618,
@@ -51,6 +56,7 @@ let pizzas = [
   },
   {
     img: './img/firmennaya.jpg',
+    id: 6,
     name: 'Фирменная пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'салями', 'огурцы', 'грибы', 'сыр'],
     callory: 519,
@@ -58,6 +64,7 @@ let pizzas = [
   },
   {
     img: './img/fintess.jpg',
+    id: 7,
     name: 'Фитнесс пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'сыр'],
     callory: 295,
@@ -65,6 +72,7 @@ let pizzas = [
   },
   {
     img: './img/vetchina.jpg',
+    id: 8,
     name: 'Ветчина пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'ветчина', 'сыр'],
     callory: 356,
@@ -72,6 +80,7 @@ let pizzas = [
   },
   {
     img: './img/chiken.jpg',
+    id: 9,
     name: 'Куриная пицца',
     ingredients: ['основа', 'соус', 'курица', 'ананасы', 'сыр'],
     callory: 451,
@@ -79,6 +88,7 @@ let pizzas = [
   },
   {
     img: './img/family.jpg',
+    id: 10,
     name: 'Семейная пицца',
     ingredients: ['основа', 'соус', 'огурцы', 'салями', 'курица', 'сыр'],
     callory: 623,
@@ -86,6 +96,7 @@ let pizzas = [
   },
   {
     img: './img/bavariya.jpg',
+    id: 11,
     name: 'Баварская пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'баварские колбаски', 'сыр'],
     callory: 456,
@@ -93,6 +104,7 @@ let pizzas = [
   },
   {
     img: './img/sea.jpg',
+    id: 12,
     name: 'Морская пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'креветки', 'рыба', 'мидии', 'сыр'],
     callory: 519,
@@ -100,6 +112,7 @@ let pizzas = [
   },
   {
     img: './img/ukrainian.jpg',
+    id: 13,
     name: 'Украинская пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'сало', 'чеснок', 'грибы', 'сыр'],
     callory: 676,
@@ -107,6 +120,7 @@ let pizzas = [
   },
   {
     img: './img/spring.jpg',
+    id: 14,
     name: 'Весенняя пицца',
     ingredients: ['основа', 'соус', 'помидоры', 'кукуруза', 'укроп', 'сыр'],
     callory: 369,
@@ -114,6 +128,7 @@ let pizzas = [
   },
   {
     img: './img/sweet.jpg',
+    id: 15,
     name: 'Сладкая пицца',
     ingredients: ['основа', 'нутелла', 'бананы', 'орехи', 'зефир'],
     callory: 1019,
@@ -150,6 +165,8 @@ filters.addEventListener('click', filterPizzas);
 closeCartCross.addEventListener('click', emptyCart);
 //for open the cart
 cartSmall.addEventListener('click', openCart);
+//close the cart
+cartOpen.addEventListener('click', openCart);
 
 
 function loadPizzas (arr) {
@@ -361,19 +378,35 @@ function renderCart() {
                     </div>
                     <div class="item__controls">
                       <div class="item__price">${item.price}</div>
-                      <div class="item__quantity">${item.quantity} шт</div>
+                      <div class="item__quantity">${item.quantity}</div>
                       <div class="item__buttons">
                         <button class="inc">+</button>
                         <button class="dec">-</button>
                       </div>
                     </div>`;
     cartList.appendChild(li);
+  };
+  let cartItems = doc.querySelectorAll('.cart__item');
+  for (let i = 0; i < cartItems.length; i++) {
+    cartItems[i].addEventListener('click', changeQuantity, true);
   }
 }
 
 function emptyCart(event) {
-  event.preventDefault();
+  event.stopPropagation();
   myCart = [];
   window.localStorage.setItem('cart', '');
   cartQuantity.innerHTML = '0';
+  cartOpen.classList.remove('open');
+}
+
+function changeQuantity(event) {
+  event.stopPropagation();
+  if (event.target.classList.contains('inc')) {
+    this.querySelector('.item__quantity').innerHTML -= -1;
+  } else if (event.target.classList.contains('dec')) {
+    if(parseInt(this.querySelector('.item__quantity').innerHTML) > 0) {
+      this.querySelector('.item__quantity').innerHTML -= 1;
+    }
+  }
 }
