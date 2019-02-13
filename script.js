@@ -298,6 +298,12 @@ function addAddings (event) {
 
   }  
 }
+
+function saveCartToStorage() {
+  let cartJSON = JSON.stringify(myCart);
+  localStorage.setItem('cart', cartJSON);
+}
+
 function buyPizza(event) {
   if(event.target.classList.contains('card__btn')) {
     event.stopImmediatePropagation();
@@ -323,9 +329,8 @@ function buyPizza(event) {
         alert('Выберите ингредиенты для вашей пиццы');
       }           
     };
-    let cartJSON = JSON.stringify(myCart);
-      localStorage.setItem('cart', cartJSON);
-      cartQuantity.innerHTML = myCart.length;
+    saveCartToStorage();
+    cartQuantity.innerHTML = myCart.length;
     if(cartOpen.classList.contains('open')) {
       renderCart();
     }
@@ -403,10 +408,14 @@ function emptyCart(event) {
 function changeQuantity(event) {
   event.stopPropagation();
   if (event.target.classList.contains('inc')) {
-    this.querySelector('.item__quantity').innerHTML -= -1;
+    myCart.find(item => item.name === this.querySelector('.item__name').innerHTML).quantity -= -1
   } else if (event.target.classList.contains('dec')) {
-    if(parseInt(this.querySelector('.item__quantity').innerHTML) > 0) {
-      this.querySelector('.item__quantity').innerHTML -= 1;
+    if(parseInt(this.querySelector('.item__quantity').innerHTML) > 1) {
+      myCart.find(item => item.name === this.querySelector('.item__name').innerHTML).quantity -= 1;
+    } else {
+      myCart = myCart.filter(item => item.name !== this.querySelector('.item__name').innerHTML);
     }
   }
+  renderCart();
+  saveCartToStorage();
 }
